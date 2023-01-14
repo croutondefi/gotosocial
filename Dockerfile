@@ -2,14 +2,14 @@
 # Dockerfile reference: https://docs.docker.com/engine/reference/builder/
 
 # stage 1: generate up-to-date swagger.yaml to put in the final container
-FROM --platform=${BUILDPLATFORM} quay.io/goswagger/swagger:v0.30.4 AS swagger
+# FROM --platform=${BUILDPLATFORM} quay.io/goswagger/swagger:v0.30.0 AS swagger
 
-COPY go.mod /go/src/github.com/superseriousbusiness/gotosocial/go.mod
-COPY go.sum /go/src/github.com/superseriousbusiness/gotosocial/go.sum
-COPY cmd /go/src/github.com/superseriousbusiness/gotosocial/cmd
-COPY internal /go/src/github.com/superseriousbusiness/gotosocial/internal
-WORKDIR /go/src/github.com/superseriousbusiness/gotosocial
-RUN swagger generate spec -o /go/src/github.com/superseriousbusiness/gotosocial/swagger.yaml --scan-models
+# COPY go.mod /go/src/github.com/croutondefi/gotosocial/go.mod
+# COPY go.sum /go/src/github.com/croutondefi/gotosocial/go.sum
+# COPY cmd /go/src/github.com/croutondefi/gotosocial/cmd
+# COPY internal /go/src/github.com/croutondefi/gotosocial/internal
+# WORKDIR /go/src/github.com/croutondefi/gotosocial
+# RUN swagger generate spec -o /go/src/github.com/croutondefi/gotosocial/swagger.yaml --scan-models
 
 # stage 2: generate the web/assets/dist bundles
 FROM --platform=${BUILDPLATFORM} node:18-alpine AS bundler
@@ -41,7 +41,7 @@ COPY --chown=1000:1000 gotosocial /gotosocial/gotosocial
 
 # copy over the web directories with templates, assets etc
 COPY --chown=1000:1000 --from=bundler web /gotosocial/web
-COPY --chown=1000:1000 --from=swagger /go/src/github.com/superseriousbusiness/gotosocial/swagger.yaml web/assets/swagger.yaml
+# COPY --chown=1000:1000 --from=swagger /go/src/github.com/croutondefi/gotosocial/swagger.yaml web/assets/swagger.yaml
 
 VOLUME [ "/gotosocial/storage" ]
 ENTRYPOINT [ "/gotosocial/gotosocial", "server", "start" ]

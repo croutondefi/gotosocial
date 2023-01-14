@@ -18,6 +18,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	godebug "runtime/debug"
@@ -115,5 +116,5 @@ func version() string {
 		}
 	}
 
-	return strings.Join(info, " ")
+	return fmt.Sprintf("2.7.2 (compatible; GoToSocial %s)", strings.Join(info, " "))
 }
