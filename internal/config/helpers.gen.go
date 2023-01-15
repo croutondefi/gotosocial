@@ -2669,9 +2669,7 @@ func (st *ConfigState) SetCacheGTSEmojiCategorySweepFreq(v time.Duration) {
 func CacheGTSEmojiCategorySweepFreqFlag() string { return "cache-gts-emoji-category-sweep-freq" }
 
 // GetCacheGTSEmojiCategorySweepFreq safely fetches the value for global configuration 'Cache.GTS.EmojiCategorySweepFreq' field
-func GetCacheGTSEmojiCategorySweepFreq() time.Duration {
-	return global.GetCacheGTSEmojiCategorySweepFreq()
-}
+func GetCacheGTSEmojiCategorySweepFreq() time.Duration { return global.GetCacheGTSEmojiCategorySweepFreq() }
 
 // SetCacheGTSEmojiCategorySweepFreq safely sets the value for global configuration 'Cache.GTS.EmojiCategorySweepFreq' field
 func SetCacheGTSEmojiCategorySweepFreq(v time.Duration) { global.SetCacheGTSEmojiCategorySweepFreq(v) }
@@ -3198,9 +3196,7 @@ func (st *ConfigState) SetCacheGTSNotificationSweepFreq(v time.Duration) {
 func CacheGTSNotificationSweepFreqFlag() string { return "cache-gts-notification-sweep-freq" }
 
 // GetCacheGTSNotificationSweepFreq safely fetches the value for global configuration 'Cache.GTS.NotificationSweepFreq' field
-func GetCacheGTSNotificationSweepFreq() time.Duration {
-	return global.GetCacheGTSNotificationSweepFreq()
-}
+func GetCacheGTSNotificationSweepFreq() time.Duration { return global.GetCacheGTSNotificationSweepFreq() }
 
 // SetCacheGTSNotificationSweepFreq safely sets the value for global configuration 'Cache.GTS.NotificationSweepFreq' field
 func SetCacheGTSNotificationSweepFreq(v time.Duration) { global.SetCacheGTSNotificationSweepFreq(v) }
@@ -3863,6 +3859,14 @@ func (st *ConfigState) GetRequestIDHeader() (v string) {
 	return
 }
 
+// GetTonAPIMainNetURI safely fetches the Configuration value for state's 'TonAPIMainNetURI' field
+func (st *ConfigState) GetTonAPIMainNetURI() (v string) {
+	st.mutex.Lock()
+	v = st.config.TonAPIMainNetURI
+	st.mutex.Unlock()
+	return
+}
+
 // SetRequestIDHeader safely sets the Configuration value for state's 'RequestIDHeader' field
 func (st *ConfigState) SetRequestIDHeader(v string) {
 	st.mutex.Lock()
@@ -3879,3 +3883,145 @@ func GetRequestIDHeader() string { return global.GetRequestIDHeader() }
 
 // SetRequestIDHeader safely sets the value for global configuration 'RequestIDHeader' field
 func SetRequestIDHeader(v string) { global.SetRequestIDHeader(v) }
+// SetTonAPIMainNetURI safely sets the Configuration value for state's 'TonAPIMainNetURI' field
+func (st *ConfigState) SetTonAPIMainNetURI(v string) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonAPIMainNetURI = v
+	st.reloadToViper()
+}
+
+// TonAPIMainNetURIFlag returns the flag name for the 'TonAPIMainNetURI' field
+func TonAPIMainNetURIFlag() string { return "tonapi-mainnet-uri" }
+
+// GetTonAPIMainNetURI safely fetches the value for global configuration 'TonAPIMainNetURI' field
+func GetTonAPIMainNetURI() string { return global.GetTonAPIMainNetURI() }
+
+// SetTonAPIMainNetURI safely sets the value for global configuration 'TonAPIMainNetURI' field
+func SetTonAPIMainNetURI(v string) { global.SetTonAPIMainNetURI(v) }
+
+// GetTonAPITestNetURI safely fetches the Configuration value for state's 'TonAPITestNetURI' field
+func (st *ConfigState) GetTonAPITestNetURI() (v string) {
+	st.mutex.Lock()
+	v = st.config.TonAPITestNetURI
+	st.mutex.Unlock()
+	return
+}
+
+// SetTonAPITestNetURI safely sets the Configuration value for state's 'TonAPITestNetURI' field
+func (st *ConfigState) SetTonAPITestNetURI(v string) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonAPITestNetURI = v
+	st.reloadToViper()
+}
+
+// TonAPITestNetURIFlag returns the flag name for the 'TonAPITestNetURI' field
+func TonAPITestNetURIFlag() string { return "tonapi-testnet-uri" }
+
+// GetTonAPITestNetURI safely fetches the value for global configuration 'TonAPITestNetURI' field
+func GetTonAPITestNetURI() string { return global.GetTonAPITestNetURI() }
+
+// SetTonAPITestNetURI safely sets the value for global configuration 'TonAPITestNetURI' field
+func SetTonAPITestNetURI(v string) { global.SetTonAPITestNetURI(v) }
+
+// GetTonAPIServerSideToken safely fetches the Configuration value for state's 'TonAPIServerSideToken' field
+func (st *ConfigState) GetTonAPIServerSideToken() (v string) {
+	st.mutex.Lock()
+	v = st.config.TonAPIServerSideToken
+	st.mutex.Unlock()
+	return
+}
+
+// SetTonAPIServerSideToken safely sets the Configuration value for state's 'TonAPIServerSideToken' field
+func (st *ConfigState) SetTonAPIServerSideToken(v string) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonAPIServerSideToken = v
+	st.reloadToViper()
+}
+
+// TonAPIServerSideTokenFlag returns the flag name for the 'TonAPIServerSideToken' field
+func TonAPIServerSideTokenFlag() string { return "tonapi-token" }
+
+// GetTonAPIServerSideToken safely fetches the value for global configuration 'TonAPIServerSideToken' field
+func GetTonAPIServerSideToken() string { return global.GetTonAPIServerSideToken() }
+
+// SetTonAPIServerSideToken safely sets the value for global configuration 'TonAPIServerSideToken' field
+func SetTonAPIServerSideToken(v string) { global.SetTonAPIServerSideToken(v) }
+
+// GetTonproofPayloadLifeTimeSec safely fetches the Configuration value for state's 'TonproofPayloadLifeTimeSec' field
+func (st *ConfigState) GetTonproofPayloadLifeTimeSec() (v int) {
+	st.mutex.Lock()
+	v = st.config.TonproofPayloadLifeTimeSec
+	st.mutex.Unlock()
+	return
+}
+
+// SetTonproofPayloadLifeTimeSec safely sets the Configuration value for state's 'TonproofPayloadLifeTimeSec' field
+func (st *ConfigState) SetTonproofPayloadLifeTimeSec(v int) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonproofPayloadLifeTimeSec = v
+	st.reloadToViper()
+}
+
+// TonproofPayloadLifeTimeSecFlag returns the flag name for the 'TonproofPayloadLifeTimeSec' field
+func TonproofPayloadLifeTimeSecFlag() string { return "tonproof-payload-lifetime-sec" }
+
+// GetTonproofPayloadLifeTimeSec safely fetches the value for global configuration 'TonproofPayloadLifeTimeSec' field
+func GetTonproofPayloadLifeTimeSec() int { return global.GetTonproofPayloadLifeTimeSec() }
+
+// SetTonproofPayloadLifeTimeSec safely sets the value for global configuration 'TonproofPayloadLifeTimeSec' field
+func SetTonproofPayloadLifeTimeSec(v int) { global.SetTonproofPayloadLifeTimeSec(v) }
+
+// GetTonproofLifeTimeSec safely fetches the Configuration value for state's 'TonproofLifeTimeSec' field
+func (st *ConfigState) GetTonproofLifeTimeSec() (v int) {
+	st.mutex.Lock()
+	v = st.config.TonproofLifeTimeSec
+	st.mutex.Unlock()
+	return
+}
+
+// SetTonproofLifeTimeSec safely sets the Configuration value for state's 'TonproofLifeTimeSec' field
+func (st *ConfigState) SetTonproofLifeTimeSec(v int) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonproofLifeTimeSec = v
+	st.reloadToViper()
+}
+
+// TonproofLifeTimeSecFlag returns the flag name for the 'TonproofLifeTimeSec' field
+func TonproofLifeTimeSecFlag() string { return "tonproof-proof-lifetime-sec" }
+
+// GetTonproofLifeTimeSec safely fetches the value for global configuration 'TonproofLifeTimeSec' field
+func GetTonproofLifeTimeSec() int { return global.GetTonproofLifeTimeSec() }
+
+// SetTonproofLifeTimeSec safely sets the value for global configuration 'TonproofLifeTimeSec' field
+func SetTonproofLifeTimeSec(v int) { global.SetTonproofLifeTimeSec(v) }
+
+// GetTonproofExampleDomain safely fetches the Configuration value for state's 'TonproofExampleDomain' field
+func (st *ConfigState) GetTonproofExampleDomain() (v string) {
+	st.mutex.Lock()
+	v = st.config.TonproofExampleDomain
+	st.mutex.Unlock()
+	return
+}
+
+// SetTonproofExampleDomain safely sets the Configuration value for state's 'TonproofExampleDomain' field
+func (st *ConfigState) SetTonproofExampleDomain(v string) {
+	st.mutex.Lock()
+	defer st.mutex.Unlock()
+	st.config.TonproofExampleDomain = v
+	st.reloadToViper()
+}
+
+// TonproofExampleDomainFlag returns the flag name for the 'TonproofExampleDomain' field
+func TonproofExampleDomainFlag() string { return "tonproof-example-domain" }
+
+// GetTonproofExampleDomain safely fetches the value for global configuration 'TonproofExampleDomain' field
+func GetTonproofExampleDomain() string { return global.GetTonproofExampleDomain() }
+
+// SetTonproofExampleDomain safely sets the value for global configuration 'TonproofExampleDomain' field
+func SetTonproofExampleDomain(v string) { global.SetTonproofExampleDomain(v) }
+

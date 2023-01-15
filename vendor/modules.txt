@@ -472,6 +472,16 @@ github.com/spf13/viper/internal/encoding/toml
 github.com/spf13/viper/internal/encoding/yaml
 # github.com/stretchr/testify v1.8.4
 ## explicit; go 1.20
+# github.com/startfellows/tongo v0.11.3
+## explicit; go 1.18
+github.com/startfellows/tongo
+github.com/startfellows/tongo/boc
+github.com/startfellows/tongo/contract/jetton
+github.com/startfellows/tongo/tl
+github.com/startfellows/tongo/tlb
+github.com/startfellows/tongo/utils
+github.com/startfellows/tongo/wallet
+## explicit; go 1.13
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
 github.com/stretchr/testify/suite

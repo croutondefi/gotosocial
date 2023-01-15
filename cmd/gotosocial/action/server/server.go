@@ -19,6 +19,7 @@ package server
 
 import (
 	"context"
+	"crypto/ed25519"
 	"errors"
 	"fmt"
 	"net/http"
@@ -217,6 +218,11 @@ var Start action.GTSAction = func(ctx context.Context) error {
 		return fmt.Errorf("error generating session name for session middleware: %w", err)
 	}
 
+	pub, priv, err := ed25519.GenerateKey(nil)
+	if err != nil {
+		return fmt.Errorf("generate keys error: %v", err)
+	}
+
 	var (
 		authModule        = api.NewAuth(dbService, processor, idp, routerSession, sessionName) // auth/oauth paths
 		clientModule      = api.NewClient(dbService, processor)                                // api client endpoints
@@ -225,6 +231,7 @@ var Start action.GTSAction = func(ctx context.Context) error {
 		nodeInfoModule    = api.NewNodeInfo(processor)                                         // nodeinfo endpoint
 		activityPubModule = api.NewActivityPub(dbService, processor)                           // ActivityPub endpoints
 		webModule         = web.New(dbService, processor)                                      // web pages + user profiles + settings panels etc
+		tonConnectModule  = api.NewTonConnect(pub, priv)                                       // TonConnect endpoints
 	)
 
 	// create required middleware
@@ -254,6 +261,7 @@ var Start action.GTSAction = func(ctx context.Context) error {
 	activityPubModule.Route(router, s2sLimit, s2sThrottle, gzip)
 	activityPubModule.RoutePublicKey(router, s2sLimit, pkThrottle, gzip)
 	webModule.Route(router, fsLimit, fsThrottle, gzip)
+	tonConnectModule.Route(router, clLimit, clThrottle, gzip)
 
 	gts, err := gotosocial.NewServer(dbService, router, federator, mediaManager)
 	if err != nil {

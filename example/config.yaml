@@ -922,3 +922,10 @@ advanced-throttling-retry-after: "30s"
 # 2 cpu = 1 concurrent sender
 # 4 cpu = 1 concurrent sender
 advanced-sender-multiplier: 2
+tonapi-mainnet-uri: https://tonapi.io
+tonapi-testnet-uri: https://testnet.tonapi.io
+tonapi-token: <token>
+
+tonproof-payload-lifetime-sec: 300
+tonproof-proof-lifetime-sec: 300
+tonproof-example-domain: ton-connect.github.io
