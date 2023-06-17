@@ -22,14 +22,14 @@ func GetWalletPubKey(ctx context.Context, address string, net string) (ed25519.P
 	log := log.WithField("prefix", "GetWalletPubKey")
 	u, err := url.Parse(net)
 	if err != nil {
-		// log.Fatal(err)
+		log.Fatal(err)
 		return nil, err
 	}
 	u.Path = path.Join(u.Path, GetWalletPath)
 	GetWalletUrl := u.String()
 	req, err := http.NewRequest(http.MethodGet, GetWalletUrl, nil)
 	if err != nil {
-		// log.Error(err)
+		log.Error(err)
 		return nil, err
 	}
 

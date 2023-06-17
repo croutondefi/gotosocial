@@ -231,7 +231,7 @@ var Start action.GTSAction = func(ctx context.Context) error {
 		nodeInfoModule    = api.NewNodeInfo(processor)                                         // nodeinfo endpoint
 		activityPubModule = api.NewActivityPub(dbService, processor)                           // ActivityPub endpoints
 		webModule         = web.New(dbService, processor)                                      // web pages + user profiles + settings panels etc
-		tonConnectModule  = api.NewTonConnect(pub, priv)                                       // TonConnect endpoints
+		tonConnectModule  = api.NewTonConnect(dbService, pub, priv)                            // TonConnect endpoints
 	)
 
 	// create required middleware

@@ -20,6 +20,7 @@ import (
 	"github.com/golang-jwt/jwt"
 
 	"github.com/superseriousbusiness/gotosocial/internal/config"
+	"github.com/superseriousbusiness/gotosocial/internal/db"
 	"github.com/superseriousbusiness/gotosocial/internal/log"
 )
 
@@ -170,24 +171,20 @@ func (m *Module) CheckProofPOSTHandler(c *gin.Context) {
 		return
 	}
 
-	claims := &jwtCustomClaims{
-		tp.Address,
-		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour).Unix(),
-		},
-	}
+	_, err = m.db.GetUserByTonAddressAndWorkchain(ctx, parsed.Address, parsed.Workchain)
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-	t, err := token.SignedString([]byte("secret"))
-	if err != nil {
-		c.JSON(HttpResErrorWithLog(err.Error(), http.StatusBadRequest, &log))
+	if err == db.ErrNoEntries {
+		//create user
+	} else if err != nil {
+		c.JSON(HttpResErrorWithLog("failed to authenticate user", http.StatusBadRequest, &log))
 
 		return
 	}
 
+	//return a token for a curent user
+
 	c.JSON(http.StatusOK, gin.H{
-		"token": t,
+		"status": "proved",
 	})
 }
 

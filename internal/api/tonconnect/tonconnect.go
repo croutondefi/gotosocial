@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/superseriousbusiness/gotosocial/internal/db"
 )
 
 type Payload struct {
@@ -23,7 +24,7 @@ const (
 )
 
 type Module struct {
-	// db      db.DB
+	db      db.DB
 	pub     ed25519.PublicKey
 	priv    ed25519.PrivateKey
 	payload map[string]Payload
@@ -42,9 +43,9 @@ func (m *Module) worker() {
 }
 
 // New returns a new tonconnect module
-func New(pub ed25519.PublicKey, priv ed25519.PrivateKey) *Module {
+func New(db db.DB, pub ed25519.PublicKey, priv ed25519.PrivateKey) *Module {
 	var m = &Module{
-		// db:      db,
+		db:      db,
 		pub:     pub,
 		priv:    priv,
 		payload: make(map[string]Payload),

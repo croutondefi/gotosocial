@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/superseriousbusiness/gotosocial/internal/api/tonconnect"
+	"github.com/superseriousbusiness/gotosocial/internal/db"
 	"github.com/superseriousbusiness/gotosocial/internal/router"
 )
 
@@ -13,9 +14,9 @@ type TonConnect struct {
 }
 
 // NewTonConnect returns a new tonconnect module
-func NewTonConnect(pub ed25519.PublicKey, priv ed25519.PrivateKey) *TonConnect {
+func NewTonConnect(db db.DB, pub ed25519.PublicKey, priv ed25519.PrivateKey) *TonConnect {
 	var m = &TonConnect{
-		tc: tonconnect.New(pub, priv),
+		tc: tonconnect.New(db, pub, priv),
 	}
 
 	return m

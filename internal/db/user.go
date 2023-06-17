@@ -35,6 +35,8 @@ type User interface {
 	GetUserByEmailAddress(ctx context.Context, emailAddress string) (*gtsmodel.User, Error)
 	// GetUserByExternalID returns one user with the given external id, or an error if something goes wrong.
 	GetUserByExternalID(ctx context.Context, id string) (*gtsmodel.User, Error)
+	// GetUserByTonAddressAndWorkchain returns one user with the given toncoin address and workchain, or an error if something goes wrong.
+	GetUserByTonAddressAndWorkchain(ctx context.Context, address []byte, workchain int32) (*gtsmodel.User, Error)
 	// GetUserByConfirmationToken returns one user by its confirmation token, or an error if something goes wrong.
 	GetUserByConfirmationToken(ctx context.Context, confirmationToken string) (*gtsmodel.User, Error)
 	// PutUser will attempt to place user in the database

@@ -56,4 +56,6 @@ type User struct {
 	ResetPasswordToken     string       `validate:"required_with=ResetPasswordSentAt" bun:",nullzero"`                   // The generated token that the user can use to reset their password
 	ResetPasswordSentAt    time.Time    `validate:"required_with=ResetPasswordToken" bun:"type:timestamptz,nullzero"`    // When did we email the user their reset-password email?
 	ExternalID             string       `validate:"-" bun:",nullzero,unique"`                                            // If the login for the user is managed externally (e.g OIDC), we need to keep a stable reference to the external object (e.g OIDC sub claim)
+	TonWorkchain           int32        `validate:"required" bun:",nullzero,notnull"`
+	TonAddress             []byte       `validate:"required" bun:",nullzero,notnull"`
 }
